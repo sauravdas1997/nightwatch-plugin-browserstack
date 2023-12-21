@@ -188,6 +188,9 @@ module.exports = {
       if (!helper.isTestObservabilitySession()) {
         return;
       }
+      console.log('=============== STEP END ===============');
+      console.log(JSON.stringify(args.report.testStepFinished));
+      console.log('=============== STEP END ===============');
       try {
         const reportData = args.report;
         const testCaseId = _testCasesData[args.envelope.testCaseStartedId].testCaseId;

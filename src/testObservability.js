@@ -430,6 +430,7 @@ class TestObservability {
       const testCaseResult = reportData.testCaseFinished[args.envelope.testCaseStartedId];
       let result = 'passed';
       steps.every((step) => {
+        console.log(`++++++++++++++++++++++++++++++++++++++++ ${step.result} ++++++++++++++++++++++++++++++++++++++++`);
         if (step.result === 'FAILED'){
           result = 'failed';
           testCaseResult.failure = step.failure;
