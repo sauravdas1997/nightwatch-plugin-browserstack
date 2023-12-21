@@ -188,13 +188,17 @@ module.exports = {
       if (!helper.isTestObservabilitySession()) {
         return;
       }
-      console.log('=============== STEP END ===============');
-      console.log(JSON.stringify(args.report.testStepFinished));
-      console.log('=============== STEP END ===============');
       try {
         const reportData = args.report;
         const testCaseId = _testCasesData[args.envelope.testCaseStartedId].testCaseId;
         const testStepFinished = reportData.testStepFinished[args.envelope.testCaseStartedId];
+  
+        console.log('=============== STEP END ===============');
+        console.log(JSON.stringify(args.report.testStepFinished));
+        console.log(JSON.stringify(args.envelope.testCaseStartedId));
+        console.log(JSON.stringify(testStepFinished.testStepResult?.status));
+        console.log('=============== STEP END ===============');
+  
         const pickleId = reportData.testCases.find((testCase) => testCase.id === testCaseId).pickleId;
         const pickleData = reportData.pickle.find((pickle) => pickle.id === pickleId);
         const testSteps = reportData.testCases.find((testCase) => testCase.id === testCaseId).testSteps;
