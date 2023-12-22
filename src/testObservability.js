@@ -7,7 +7,7 @@ const helper = require('./utils/helper');
 const {makeRequest} = require('./utils/requestHelper');
 const CrashReporter = require('./utils/crashReporter');
 const Logger = require('./utils/logger');
-const {API_URL} = require('./utils/constants');
+const {API_URL, consoleHolder} = require('./utils/constants');
 
 class TestObservability {
   configure(settings = {}) {
@@ -429,11 +429,11 @@ class TestObservability {
     if (reportData.testCaseFinished && steps) {
       const testCaseResult = reportData.testCaseFinished[args.envelope.testCaseStartedId];
       let result = 'passed';
-      console.log('+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+');
-      console.log(testMetaData);
-      console.log(eventType);
-      console.log(JSON.stringify(steps));
-      console.log('+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+');
+      consoleHolder.log('+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+');
+      consoleHolder.log(testMetaData);
+      consoleHolder.log(eventType);
+      consoleHolder.log(JSON.stringify(steps));
+      consoleHolder.log('+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+');
       steps.every((step) => {
         console.log(`++++++++++++++++++++++++++++++++++++++++ ${step.result} ++++++++++++++++++++++++++++++++++++++++`);
         if (step.result === 'FAILED'){
