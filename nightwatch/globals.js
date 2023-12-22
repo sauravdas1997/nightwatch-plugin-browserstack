@@ -167,14 +167,14 @@ module.exports = {
         
         consoleHolder.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^ TestStepStarted ^^^^^^^^^^^^^^^^^^^^^^^^^^^');
         consoleHolder.log('TestStepStarted::pickleStepId ----- ' + pickleStepId);
-        consoleHolder.log('TestStepStarted::_tests["testStepId"] ----- ' + _tests['testStepId']);
+        consoleHolder.log('TestStepStarted::_tests["testStepId"] ----- ' + _tests[testCaseId]?.['testStepId']);
         consoleHolder.log('_tests : ============================================ ');
         consoleHolder.log(JSON.stringify(_tests));
         consoleHolder.log('_tests : ============================================ ');
         consoleHolder.log('TestStepStarted::testStepId ----- ' + testStepId);
 
-        if (pickleStepId && _tests['testStepId'] !== testStepId) {
-          _tests['testStepId'] = testStepId;
+        if (pickleStepId && _tests[testCaseId]?.['testStepId'] !== testStepId) {
+          _tests[testCaseId]['testStepId'] = testStepId;
           const pickleStepData = pickleData.steps.find((pickle) => pickle.id === pickleStepId);
           const testMetaData = _tests[testCaseId] || {steps: []};
           if (testMetaData && !testMetaData.steps) {
@@ -228,11 +228,11 @@ module.exports = {
         consoleHolder.log('testStepId ==== '+ testStepId);
 
         consoleHolder.log('pickleStepId : ' + pickleStepId);
-        consoleHolder.log('_tests["testStepId"] : ' + _tests['testStepId']);
+        consoleHolder.log('_tests["testStepId"] : ' + _tests[testCaseId]['testStepId']);
         consoleHolder.log('_tests : ============================================ ');
         consoleHolder.log(_tests);
         consoleHolder.log('_tests : ============================================ ');
-        if (pickleStepId && _tests['testStepId']) {
+        if (pickleStepId && _tests[testCaseId]['testStepId']) {
           consoleHolder.log('------------------ IN MAIN IF ------------------');
           const pickleStepData = pickleData.steps.find((pickle) => pickle.id === pickleStepId);
           const testMetaData = _tests[testCaseId] || {steps: []};
@@ -260,7 +260,7 @@ module.exports = {
             });
           }
           _tests[testCaseId] = testMetaData;
-          delete _tests['testStepId'];
+          delete _tests[testCaseId]['testStepId'];
           if (testStepFinished.httpOutput && testStepFinished.httpOutput.length > 0) {
             for (const [index, output] of testStepFinished.httpOutput.entries()) {
               if (index % 2 === 0) {
