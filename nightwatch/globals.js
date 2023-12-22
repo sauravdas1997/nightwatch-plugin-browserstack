@@ -226,7 +226,9 @@ module.exports = {
 
         consoleHolder.log('pickleStepId : ' + pickleStepId);
         consoleHolder.log('_tests["testStepId"] : ' + _tests['testStepId']);
-        consoleHolder.log('_tests : ' + _tests);
+        consoleHolder.log('_tests : ============================================ ');
+        consoleHolder.log(_tests);
+        consoleHolder.log('_tests : ============================================ ');
         if (pickleStepId && _tests['testStepId']) {
           consoleHolder.log('------------------ IN MAIN IF ------------------');
           const pickleStepData = pickleData.steps.find((pickle) => pickle.id === pickleStepId);
