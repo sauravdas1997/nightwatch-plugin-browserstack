@@ -430,7 +430,7 @@ class TestObservability {
       const testCaseResult = reportData.testCaseFinished[args.envelope.testCaseStartedId];
       let result = 'passed';
       consoleHolder.log('+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+');
-      consoleHolder.log(JSON.stringify(testMetaData));
+      consoleHolder.log(testMetaData);
       consoleHolder.log('eventType : '+ eventType);
       consoleHolder.log('testCaseStartedId : ' + args.envelope.testCaseStartedId);
       consoleHolder.log('+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+');
