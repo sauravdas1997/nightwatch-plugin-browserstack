@@ -1,6 +1,6 @@
 const LocalTunnel = require('../src/local-tunnel');
 const TestObservability = require('../src/testObservability');
-const {CUSTOM_REPORTER_CALLBACK_TIMEOUT, EVENTS} = require('../src/utils/constants');
+const {CUSTOM_REPORTER_CALLBACK_TIMEOUT, EVENTS, consoleHolder} = require('../src/utils/constants');
 const CrashReporter = require('../src/utils/crashReporter');
 const helper = require('../src/utils/helper');
 const Logger = require('../src/utils/logger');
@@ -197,7 +197,6 @@ module.exports = {
         console.log(JSON.stringify(args.report.testStepFinished));
         console.log(JSON.stringify('testCaseStartedId' + args.envelope.testCaseStartedId));
         console.log(JSON.stringify(testStepFinished.testStepResult?.status));
-        console.log('=============== STEP END ===============');
   
         const pickleId = reportData.testCases.find((testCase) => testCase.id === testCaseId).pickleId;
         const pickleData = reportData.pickle.find((pickle) => pickle.id === pickleId);
@@ -209,12 +208,17 @@ module.exports = {
         if (testStepFinished.testStepResult?.status.toString().toLowerCase() === 'failed') {
           failure = (testStepFinished.testStepResult?.exception === undefined) ? testStepFinished.testStepResult?.message : testStepFinished.testStepResult?.exception?.message;
           failureType = (testStepFinished.testStepResult?.exception === undefined) ? 'UnhandledError' : testStepFinished.testStepResult?.message;
+          consoleHolder.log('failure : ' + failure);
+          consoleHolder.log('failureType : ' + failureType);
         }
 
         if (pickleStepId && _tests['testStepId']) {
+          consoleHolder.log('pickleStepId : ' + pickleStepId);
+          consoleHolder.log('_tests["testStepId"] : ' + _tests['testStepId']);
           const pickleStepData = pickleData.steps.find((pickle) => pickle.id === pickleStepId);
           const testMetaData = _tests[testCaseId] || {steps: []};
           if (!testMetaData.steps) {
+            consoleHolder.log('!testMetaData.steps : ');
             testMetaData.steps = [{
               id: pickleStepData.id,
               text: pickleStepData.text,
@@ -225,6 +229,7 @@ module.exports = {
               failureType: failureType
             }];
           } else {
+            consoleHolder.log('-------- IN ELSE -------- ');
             testMetaData.steps.forEach((step) => {
               if (step.id === pickleStepData.id) {
                 step.finished_at = new Date().toISOString();
@@ -245,6 +250,7 @@ module.exports = {
             }
           }
         }
+        consoleHolder.log('=============== STEP END ===============');
       } catch (error) {
         CrashReporter.uploadCrashReport(error.message, error.stack);
         Logger.error(`Something went wrong in processing report file for test observability - ${error.message} with stacktrace ${error.stack}`);
