@@ -168,6 +168,9 @@ module.exports = {
         consoleHolder.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^ TestStepStarted ^^^^^^^^^^^^^^^^^^^^^^^^^^^');
         consoleHolder.log('TestStepStarted::pickleStepId ----- ' + pickleStepId);
         consoleHolder.log('TestStepStarted::_tests["testStepId"] ----- ' + _tests['testStepId']);
+        consoleHolder.log('_tests : ============================================ ');
+        consoleHolder.log(JSON.stringify(_tests));
+        consoleHolder.log('_tests : ============================================ ');
         consoleHolder.log('TestStepStarted::testStepId ----- ' + testStepId);
 
         if (pickleStepId && _tests['testStepId'] !== testStepId) {
