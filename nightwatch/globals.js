@@ -212,13 +212,19 @@ module.exports = {
           consoleHolder.log('failureType : ' + failureType);
         }
 
+        consoleHolder.log('[[[[[[[[[[[[[[[[ testSteps ]]]]]]]]]]]]]]');
+        consoleHolder.log(testSteps);
+        consoleHolder.log('[[[[[[[[[[[[[[[[ testSteps ]]]]]]]]]]]]]]');
+        consoleHolder.log('testStepId ==== '+ testStepId);
+
+        consoleHolder.log('pickleStepId : ' + pickleStepId);
+        consoleHolder.log('_tests["testStepId"] : ' + _tests['testStepId']);
         if (pickleStepId && _tests['testStepId']) {
-          consoleHolder.log('pickleStepId : ' + pickleStepId);
-          consoleHolder.log('_tests["testStepId"] : ' + _tests['testStepId']);
+          consoleHolder.log('------------------ IN MAIN IF ------------------');
           const pickleStepData = pickleData.steps.find((pickle) => pickle.id === pickleStepId);
           const testMetaData = _tests[testCaseId] || {steps: []};
           if (!testMetaData.steps) {
-            consoleHolder.log('!testMetaData.steps : ');
+            consoleHolder.log('-------- IN IF -------- ');
             testMetaData.steps = [{
               id: pickleStepData.id,
               text: pickleStepData.text,
