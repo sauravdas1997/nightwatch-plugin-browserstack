@@ -164,6 +164,12 @@ module.exports = {
         const testSteps = reportData.testCases.find((testCase) => testCase.id === testCaseId).testSteps;
         const testStepId = reportData.testStepStarted[args.envelope.testCaseStartedId].testStepId;
         const pickleStepId = testSteps.find((testStep) => testStep.id === testStepId).pickleStepId;
+        
+        consoleHolder.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^ TestStepStarted ^^^^^^^^^^^^^^^^^^^^^^^^^^^');
+        consoleHolder.log('TestStepStarted::pickleStepId ----- ' + pickleStepId);
+        consoleHolder.log('TestStepStarted::_tests["testStepId"] ----- ' + _tests['testStepId']);
+        consoleHolder.log('TestStepStarted::testStepId ----- ' + testStepId);
+
         if (pickleStepId && _tests['testStepId'] !== testStepId) {
           _tests['testStepId'] = testStepId;
           const pickleStepData = pickleData.steps.find((pickle) => pickle.id === pickleStepId);
@@ -182,6 +188,7 @@ module.exports = {
         CrashReporter.uploadCrashReport(error.message, error.stack);
         Logger.error(`Something went wrong in processing report file for test observability - ${error.message} with stacktrace ${error.stack}`);
       }
+      consoleHolder.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^ TestStepStarted ^^^^^^^^^^^^^^^^^^^^^^^^^^^');
     });
 
     eventBroadcaster.on('TestStepFinished', async (args) => {
@@ -219,6 +226,7 @@ module.exports = {
 
         consoleHolder.log('pickleStepId : ' + pickleStepId);
         consoleHolder.log('_tests["testStepId"] : ' + _tests['testStepId']);
+        consoleHolder.log('_tests : ' + _tests);
         if (pickleStepId && _tests['testStepId']) {
           consoleHolder.log('------------------ IN MAIN IF ------------------');
           const pickleStepData = pickleData.steps.find((pickle) => pickle.id === pickleStepId);
