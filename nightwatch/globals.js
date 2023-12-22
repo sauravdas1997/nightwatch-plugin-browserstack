@@ -195,7 +195,7 @@ module.exports = {
   
         console.log('=============== STEP END ===============');
         console.log(JSON.stringify(args.report.testStepFinished));
-        console.log(JSON.stringify(args.envelope.testCaseStartedId));
+        console.log(JSON.stringify('testCaseStartedId' + args.envelope.testCaseStartedId));
         console.log(JSON.stringify(testStepFinished.testStepResult?.status));
         console.log('=============== STEP END ===============');
   
