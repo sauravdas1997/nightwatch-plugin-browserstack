@@ -429,6 +429,11 @@ class TestObservability {
     if (reportData.testCaseFinished && steps) {
       const testCaseResult = reportData.testCaseFinished[args.envelope.testCaseStartedId];
       let result = 'passed';
+      console.log('+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+');
+      console.log(testMetaData);
+      console.log(eventType);
+      console.log(JSON.stringify(steps));
+      console.log('+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+');
       steps.every((step) => {
         console.log(`++++++++++++++++++++++++++++++++++++++++ ${step.result} ++++++++++++++++++++++++++++++++++++++++`);
         if (step.result === 'FAILED'){
